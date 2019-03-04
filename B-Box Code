@@ -55,3 +55,10 @@ newrandomdate = newbasedate + np.random.choice(days)
 birdbox1['Service_to_Date'] = random_date
 for x in birdbox1.index.values:
     birdbox1.set_value(x,'Service_to_Date', random.choice(days)+newrandomdate)
+    
+# read APRDRG file in#
+drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+drg_list = drg.drg_admit_display.tolist()
+
+for x in birdbox1.index.values:
+    birdbox1.set_value(x,'APRDRG',random.choice(drg_list))
