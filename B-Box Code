@@ -27,28 +27,6 @@ import tkinter
 import pandas as pd
 import random
 import numpy as np
-
-#df = pd.DataFrame(np.random.randint(0,10000,size=(100, 6)), columns= Columns)
-birdbox = pd.DataFrame(np.random.randn(50, 1), columns=['F'])
-#birdbox['randNumCol'] = np.random.randint(1, 6, birdbox.shape[0]) 
-birdbox['Claim_id'] = np.random.randint(100000, 999999, birdbox.shape[0])
-birdbox['EMPI_id'] = np.random.randint(100000, 999999, birdbox.shape[0])
-birdbox['Population_id'] = np.random.randint(100000, 999999, birdbox.shape[0])
-
-birdbox.drop('F', inplace=True, axis=1)
-n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
-
-#birdbox['Provider_name'] = random.choice(fn_list) +' '+ random.choice(ln_list)
-from random import sample
-birdbox['Provider_name'] = random.sample(n_list)
-
-IGNORE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-USE
-import tkinter
-import pandas as pd
-import random
-import numpy as np
 n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
 space = [' ']
 list_size=int(input('How many rows would you like?'))
@@ -64,3 +42,16 @@ for x in birdbox1.index.values:
 birdbox1['Claim_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['EMPI_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['Population_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
+
+days = np.arange(0, 365)
+base_date = np.datetime64('2016-01-01')
+random_date = base_date + np.random.choice(days)
+birdbox1['Service_from_Date'] = random_date
+for x in birdbox1.index.values:
+    birdbox1.set_value(x,'Service_from_Date', random.choice(days)+random_date)
+    
+newbasedate = np.datetime64('2018-01-01')
+newrandomdate = newbasedate + np.random.choice(days)
+birdbox1['Service_to_Date'] = random_date
+for x in birdbox1.index.values:
+    birdbox1.set_value(x,'Service_to_Date', random.choice(days)+newrandomdate)
