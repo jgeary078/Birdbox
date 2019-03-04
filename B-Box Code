@@ -23,12 +23,20 @@ print(random.choice(fn_list), random.choice(ln_list))
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 DeVaughn
+#Import Packages
 import tkinter
 import pandas as pd
 import random
 import numpy as np
+
+
+#List of Doctor names
 n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
-space = [' ']
+
+#List of payer names
+payer_list = ['Medicare', 'Medicaid', 'Private']
+
+#Ask user for how many rows of data they want
 list_size=int(input('How many rows would you like?'))
 
 def list1(num_values):
@@ -36,13 +44,17 @@ def list1(num_values):
 
 ind = list(range(list_size))
 
-birdbox1=pd.DataFrame(index=ind,columns=['Provider_name','Claim_id','EMPI_id','Population_id'])
+
+#Random generation for claim id, empi id and pop id
+birdbox1=pd.DataFrame(index=ind,columns=['Provider_name','Claim_id','EMPI_id','Population_id','source_desc'])
 for x in birdbox1.index.values:
     birdbox1.set_value(x,'Provider_name',random.choice(n_list))
+    birdbox1.set_value(x,'source_desc',random.choice(payer_list))
 birdbox1['Claim_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['EMPI_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['Population_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 
+#Random dates range
 days = np.arange(0, 365)
 base_date = np.datetime64('2016-01-01')
 random_date = base_date + np.random.choice(days)
@@ -56,8 +68,10 @@ birdbox1['Service_to_Date'] = random_date
 for x in birdbox1.index.values:
     birdbox1.set_value(x,'Service_to_Date', random.choice(days)+newrandomdate)
     
+    
+#Random drg things
 # read APRDRG file in#
-drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+drg = pd.read_csv(r"C:\Users\hh068327\OneDrive - Cerner Corporation\A.L.L\Demo Data\aprdrg_list.csv")
 drg_list = drg.drg_admit_display.tolist()
 
 for x in birdbox1.index.values:
