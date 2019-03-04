@@ -36,6 +36,9 @@ n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carte
 #List of payer names
 payer_list = ['Medicare', 'Medicaid', 'Private']
 
+#List of specialty
+s_list = ['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'] 
+
 #Ask user for how many rows of data they want
 list_size=int(input('How many rows would you like?'))
 
@@ -46,10 +49,12 @@ ind = list(range(list_size))
 
 
 #Random generation for claim id, empi id and pop id
-birdbox1=pd.DataFrame(index=ind,columns=['Provider_name','Claim_id','EMPI_id','Population_id','source_desc'])
+birdbox1=pd.DataFrame(index=ind,columns=['Provider_name','Claim_id','EMPI_id','Population_id','source_desc','specialty'])
 for x in birdbox1.index.values:
     birdbox1.set_value(x,'Provider_name',random.choice(n_list))
     birdbox1.set_value(x,'source_desc',random.choice(payer_list))
+    birdbox1.set_value(x,'specialty',random.choice(s_list))
+
 birdbox1['Claim_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['EMPI_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 birdbox1['Population_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
