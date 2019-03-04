@@ -1,1 +1,21 @@
 #Yuh
+
+
+
+import random  
+import pandas as pd
+import numpy as np
+from random import choice
+
+#THIS PART LETS YOU CHOOSE HOW MANY OUTPUTS THROUGH YOUR INPUT OF THE NUMBER RANGE
+range(0000000000,9999999999)
+num_list = list(range(00000000,99999999))
+
+random.sample(num_list, int(input('How many rows?')))
+
+#LISTS OF DOCTORS WITH A RANDOM GENERATOR OF ONE FULL NAME
+fn_list = ['Dr. Mark', 'Dr. Doug', 'Dr. Susan', 'Dr. John', 'Dr. Carol', 'Dr. Derek', 'Dr. Meredith', 'Dr. Andrew', 'Dr. Jackson', 'Dr. Alex', 'Dr. Izzie', 'Dr. Callie', 'Dr. Will', 'Dr. Natalie', 'Dr. Connor', 'Dr. Ethan', 'Dr. Samantha', 'Dr. Noah', 'Dr. Sam', 'Dr. David', 'Dr. Isidore', 'Dr. Ava']
+
+ln_list = ['Greene', 'Ross', 'Lewis', 'Carter', 'Hathaway', 'Shepherd', 'Grey', 'Deluca', 'Sloan', 'Avery', 'Karev', 'Stevens', 'Torres', 'Halstead', 'Manning', 'Reese', 'Rhodes', 'Choi', 'Zanetti', 'Sexton', 'Abrams', 'Downey', 'Latham']
+
+print(random.choice(fn_list), random.choice(ln_list))
