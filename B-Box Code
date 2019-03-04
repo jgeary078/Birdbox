@@ -41,3 +41,26 @@ n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carte
 #birdbox['Provider_name'] = random.choice(fn_list) +' '+ random.choice(ln_list)
 from random import sample
 birdbox['Provider_name'] = random.sample(n_list)
+
+IGNORE^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+USE
+import tkinter
+import pandas as pd
+import random
+import numpy as np
+n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
+space = [' ']
+list_size=int(input('How many rows would you like?'))
+
+def list1(num_values):
+    return list(range(num_values))
+
+ind = list(range(list_size))
+
+birdbox1=pd.DataFrame(index=ind,columns=['Provider_name','Claim_id','EMPI_id','Population_id'])
+for x in birdbox1.index.values:
+    birdbox1.set_value(x,'Provider_name',random.choice(n_list))
+birdbox1['Claim_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
+birdbox1['EMPI_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
+birdbox1['Population_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
