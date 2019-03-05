@@ -1,12 +1,42 @@
 #Yuh
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-DeVaughn
 #Import Packages
 import tkinter
 import pandas as pd
 import random
 import numpy as np
+from tkinter import *
+master = Tk()
 
+def mget ():
+    print(var1.get(), var2.get(),var3.get(), var4.get(), var5.get(), var6.get(), var7.get(), var8.get(), var9.get())
+
+Label(master, text="Column Selector:").grid(row=0, sticky=W)
+
+#Buttons
+var1 = IntVar()
+Checkbutton(master, text="Claim_ID", variable=var1).grid(row=1, sticky=W)
+var2 = IntVar()
+Checkbutton(master, text="EMPI_ID", variable=var2).grid(row=2, sticky=W)
+var3 = IntVar()
+Checkbutton(master, text="Population_ID", variable=var3).grid(row=3, sticky=W)
+var4 = IntVar()
+Checkbutton(master, text="Service_From_Date", variable=var4).grid(row=4, sticky=W)
+var5 = IntVar()
+Checkbutton(master, text="Service_To_Date", variable=var5).grid(row=5, sticky=W)
+var6 = IntVar()
+Checkbutton(master, text="DRG", variable=var6).grid(row=6, sticky=W)
+var7 = IntVar()
+Checkbutton(master, text="Source_Description", variable=var7).grid(row=7, sticky=W)
+var8 = IntVar()
+Checkbutton(master, text="Provider_Name", variable=var8).grid(row=8, sticky=W)
+var9 = IntVar()
+Checkbutton(master, text="Specialty", variable=var9).grid(row=9, sticky=W)
+
+Button(master, text="Get Data",command = mget, width = 25) .grid(row=10, sticky=W, pady=4)
+Button(master, text='Quit', command=master.destroy, width = 25).grid(row=11, sticky=W, pady=4)
+
+mainloop()
 
 #List of Doctor names
 n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
@@ -33,9 +63,9 @@ for x in birdbox1.index.values:
     birdbox1.set_value(x,'source_desc',random.choice(payer_list))
     birdbox1.set_value(x,'specialty',random.choice(s_list))
 
-birdbox1['Claim_id'] = np.random.randint(000000, 999999, birdbox1.shape[0])
-birdbox1['EMPI_id'] = np.random.randint(000000, 999999, birdbox1.shape[0])
-birdbox1['Population_id'] = np.random.randint(000000, 999999, birdbox1.shape[0])
+birdbox1['Claim_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
+birdbox1['EMPI_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
+birdbox1['Population_id'] = np.random.randint(100000, 999999, birdbox1.shape[0])
 
 #Random dates range
 days = np.arange(0, 365)
@@ -54,7 +84,7 @@ for x in birdbox1.index.values:
     
 #Random drg things
 # read APRDRG file in#
-drg = pd.read_csv(r"C:\Users\hh068327\OneDrive - Cerner Corporation\A.L.L\Demo Data\aprdrg_list.csv")
+drg = pd.read_csv(r"C:\Users\dc068326\Documents\APRDRG List.csv")
 drg_list = drg.drg_admit_display.tolist()
 
 for x in birdbox1.index.values:
