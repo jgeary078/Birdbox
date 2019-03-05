@@ -1,5 +1,7 @@
 #Yuh
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
+############# Some GUI Code ############
+
 #Import Packages
 import tkinter
 import pandas as pd
@@ -37,6 +39,8 @@ Button(master, text="Get Data",command = mget, width = 25) .grid(row=10, sticky=
 Button(master, text='Quit', command=master.destroy, width = 25).grid(row=11, sticky=W, pady=4)
 
 mainloop()
+
+############# Random Generator Code ##############
 
 #List of Doctor names
 n_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
