@@ -1,0 +1,133 @@
+from tkinter import *
+import numpy as np
+import pandas as pd
+from random import randint
+
+
+class Application(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.grid()
+        self.create_widgets()
+        
+        
+    def create_widgets(self):
+        w = Label(self,text = "Select desired columns:", bg='#aaa', width=50)
+        w.grid(row = 1, column = 0, sticky = W)
+        
+        self.checkBox_claim_id = BooleanVar()
+        Checkbutton(self,
+                    text = "claim_id",
+                    variable = self.checkBox_claim_id,
+                    command = self.update_text
+                    ).grid(row = 2, column = 0, pady = 10, sticky = W)
+
+        self.checkBox_empi_id = BooleanVar()
+        Checkbutton(self,
+                    text = "empi_id",
+                    variable = self.checkBox_empi_id,
+                    command = self.update_text
+                    ).grid(row = 3, column = 0, pady = 10, sticky = W)
+
+        self.checkBox_pop_id = BooleanVar()
+        Checkbutton(self,
+                    text = "population_id",
+                    variable = self.checkBox_pop_id,
+                    command = self.update_text
+                    ).grid(row = 4, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_serv_from_date = BooleanVar()
+        Checkbutton(self,
+                    text = "service_from_date",
+                    variable = self.checkBox_serv_from_date,
+                    command = self.update_text
+                    ).grid(row = 5, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_serv_to_date = BooleanVar()
+        Checkbutton(self,
+                    text = "service_to_date",
+                    variable = self.checkBox_serv_to_date,
+                    command = self.update_text
+                    ).grid(row = 6, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_drg = BooleanVar()
+        Checkbutton(self,
+                    text = "drg_admit_display",
+                    variable = self.checkBox_drg,
+                    command = self.update_text
+                    ).grid(row = 7, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_source = BooleanVar()
+        Checkbutton(self,
+                    text = "source_description",
+                    variable = self.checkBox_source,
+                    command = self.update_text
+                    ).grid(row = 8, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_prov_name = BooleanVar()
+        Checkbutton(self,
+                    text = "provider_name",
+                    variable = self.checkBox_prov_name,
+                    command = self.update_text
+                    ).grid(row = 9, column = 0, pady = 10, sticky = W)
+        
+        self.checkBox_spec = BooleanVar()
+        Checkbutton(self,
+                    text = "specialty",
+                    variable = self.checkBox_spec,
+                    command = self.update_text
+                    ).grid(row = 10, column = 0, pady = 10, sticky = W)
+        
+        lbl = Label(self, text="How many rows?").grid(row=11, sticky = W, padx=10, pady=10)
+        
+        e1 = Entry(self)
+        e1.grid(row=11, column=0, padx=10, pady=10, columnspan = 3)
+
+        self.get_data_button = Button(self, text = 'Generate Data', command = self.generate_data)
+        self.get_data_button.grid(row=12, column = 0, pady = 10)
+        
+        
+        self.results_txt = Text(self, width = 40, height = 5, wrap = WORD)
+        self.results_txt.grid(row = 13, column = 0, pady = 20, columnspan = 3)
+        
+    def generate_data(self):
+            print('I have generated data')
+            
+    
+    def update_text(self):
+        chk = ""
+        
+        if self.checkBox_claim_id.get():
+            chk += "You have checked the claim id field!\n"
+
+        if self.checkBox_empi_id.get():
+            chk += "You have checked the empi id field!\n"
+
+        if self.checkBox_pop_id.get():
+            chk += "You have checked the population id field!\n"
+            
+        if self.checkBox_serv_from_date.get():
+            chk += "You have checked the service from date field!\n"
+            
+        if self.checkBox_serv_to_date.get():
+            chk += "You have checked the service to date field!\n"
+            
+        if self.checkBox_drg.get():
+            chk += "You have checked the drg admit field!\n"
+            
+        if self.checkBox_source.get():
+            chk += "You have checked the source description field!\n"
+            
+        if self.checkBox_prov_name.get():
+            chk += "You have checked the provider name field!\n"
+            
+        if self.checkBox_spec.get():
+            chk += "You have checked the specialty field!"
+      
+        self.results_txt.delete(0.0, END)
+        self.results_txt.insert(0.0, chk)
+        
+root = Tk()
+root.title("Data Generator")
+app = Application(root)
+root.mainloop()
