@@ -1,0 +1,267 @@
+from tkinter import *
+
+import tkinter as tk
+
+import numpy as np
+
+import pandas as pd
+
+#from random import randint
+
+
+
+master = Tk()
+
+
+
+## Label ##
+
+w = Label(master, text="Select Fields", bg='#aaa', width=50)
+
+w.grid(columnspan=2)
+
+
+
+## Creating Checkbuttons for each field ##
+
+def randomize1():
+
+    import random
+
+    value1 = random.randint(000000,999999)
+
+    return(value1)
+
+
+
+var1 = IntVar()
+
+C1 = Checkbutton(master, text="claim_id", variable=var1)
+
+C1.grid(row=1, sticky=W, padx=10, pady=10)
+
+
+
+def randomize2():
+
+    import random
+
+    value2 = random.randint(000000,999999)
+
+    return(value2)
+
+
+
+var2 = IntVar()
+
+C2 = Checkbutton(master, text="empi_id", variable=var2)
+
+C2.grid(row=2, sticky=W, padx=10, pady=10)
+
+
+
+def randomize3():
+
+    import random
+
+    value3 = random.randint(000000,999999)
+
+    return(value3)
+
+
+
+var3 = IntVar()
+
+C3 = Checkbutton(master, text="population_id", variable=var3)
+
+C3.grid(row=3, sticky=W, padx=10, pady=10)
+
+
+
+def randomize4():
+
+    import random
+
+    days = np.arange(0, 365)
+
+    base_date = np.datetime64('2016-01-01')
+
+    random_date = base_date + np.random.choice(days)
+
+    return(random_date)
+
+
+
+var4 = IntVar()
+
+C4 = Checkbutton(master, text="service_from_date", variable = var4)
+
+C4.grid(row=4, sticky=W, padx=10, pady=10)
+
+
+
+def randomize5():
+
+    import random
+
+    days = np.arange(0, 365)
+
+    newbasedate = np.datetime64('2018-01-01')
+
+    newrandomdate = newbasedate + np.random.choice(days)
+
+    return(newrandomdate)
+
+
+
+var5 = IntVar()
+
+C5 = Checkbutton(master, text="service_to_date", variable=var5)
+
+C5.grid(row=5, sticky=W, padx=10, pady=10)
+
+
+
+def randomize6():
+
+    import random
+
+    drg = pd.read_csv(r"C:\Users\TP068261\Desktop\APRDRG list.csv")
+
+    drg_list = drg.drg_admit_display.tolist()
+
+    rand_drg = np.random.choice(drg_list)
+
+    return(rand_drg)
+
+
+
+var6 = IntVar()
+
+C6 = Checkbutton(master, text="drg_admit_display", variable=var6)
+
+C6.grid(row=6, sticky=W, padx=10, pady=10)
+
+
+
+def randomize7():
+
+    import random
+
+    payer_list = ['Medicare', 'Medicaid', 'Private']
+
+    rand_payer = np.random.choice(payer_list)
+
+    return(rand_payer)
+
+
+
+var7 = IntVar()
+
+C7 = Checkbutton(master, text="source_description", variable=var7)
+
+C7.grid(row=7, sticky=W, padx=10, pady=10)
+
+
+
+def randomize8():
+
+    import random
+
+    prov_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
+
+    rand_prov = np.random.choice(prov_list)
+
+    return(rand_prov)
+
+
+
+var8 = IntVar()
+
+C8 = Checkbutton(master, text="provider_name", variable=var8)
+
+C8.grid(row=8, sticky=W, padx=10, pady=10)
+
+
+
+def randomize9():
+
+    import random
+
+    spec_list = ['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'] 
+
+    rand_spec = np.random.choice(spec_list)
+
+    return(rand_spec)
+
+
+
+var9 = IntVar()
+
+C9 = Checkbutton(master, text="specialty", variable=var9)
+
+C9.grid(row=9, sticky=W, padx=10, pady=10)
+
+
+
+## User Input for how many rows wanted ##
+
+lbl = Label(master, text="How many rows?").grid(row=10, sticky=S, padx=20, pady=20)
+
+
+
+e1 = Entry(master)
+
+e1.grid(row=10, column=1, padx=20, pady=20, columnspan=2)
+
+e1.focus_set()
+#
+### Button to get selected fields data ##
+#
+#def combined_funcs(*randomize):
+#
+#    def combined_func(*args, **kwargs):
+#
+#        for r in randomize:
+#    
+#            r(*args, **kwargs)
+#    
+#        print (combined_funcs)
+
+
+def combined_funcs(num):
+    t = []
+    for i in range(int(num)):
+        t.append([randomize1(), randomize2(), randomize3(), randomize4(), randomize5(), randomize6(), randomize7(), randomize8(), randomize9()])
+
+    return(t)
+
+
+#b = tk.Button(master, text='Get Data', command=combined_funcs(e1))
+
+#b.grid(columnspan=2, pady=10)
+
+
+
+#master.mainloop()
+
+###############################################################################
+
+
+
+class test(tk.Tk):
+    
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.entry = tk.Entry(self)
+        self.button = tk.Button(self, text='Get', command=self.on_button)
+        self.button.pack()
+        self.entry.pack()
+        self.variable = []
+        
+    def on_button(self):
+        self.variable = combined_funcs(self.entry.get())
+        print(self.variable)
+        
+w2 = test()
+w2.mainloop()
