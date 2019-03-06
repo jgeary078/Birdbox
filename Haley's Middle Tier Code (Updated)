@@ -1,0 +1,176 @@
+import tkinter as tk
+import numpy as np
+import pandas as pd
+import random
+
+
+class Application(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        self.grid()
+        self.create_widgets()
+        
+        
+    def create_widgets(self):
+        w = tk.Label(self,text = "Select desired columns:", bg='#aaa', width=50)
+        w.grid(row = 1, column = 0, sticky = tk.W)
+        
+        self.checkBox_claim_id = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "claim_id",
+                    variable = self.checkBox_claim_id,
+                    command = self.status
+                    ).grid(row = 2, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_empi_id = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "empi_id",
+                    variable = self.checkBox_empi_id,
+                    command = self.status
+                    ).grid(row = 3, column = 0, pady = 10, sticky = tk.W)
+
+        self.checkBox_pop_id = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "population_id",
+                    variable = self.checkBox_pop_id,
+                    command = self.status
+                    ).grid(row = 4, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_serv_from_date = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "service_from_date",
+                    variable = self.checkBox_serv_from_date,
+                    command = self.status
+                    ).grid(row = 5, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_serv_to_date = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "service_to_date",
+                    variable = self.checkBox_serv_to_date,
+                    command = self.status
+                    ).grid(row = 6, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_drg = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "drg_admit_display",
+                    variable = self.checkBox_drg,
+                    command = self.status
+                    ).grid(row = 7, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_source = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "source_description",
+                    variable = self.checkBox_source,
+                    command = self.status
+                    ).grid(row = 8, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_prov_name = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "provider_name",
+                    variable = self.checkBox_prov_name,
+                    command = self.status
+                    ).grid(row = 9, column = 0, pady = 10, sticky = tk.W)
+        
+        self.checkBox_spec = tk.BooleanVar()
+        tk.Checkbutton(self,
+                    text = "specialty",
+                    variable = self.checkBox_spec,
+                    command = self.status
+                    ).grid(row = 10, column = 0, pady = 10, sticky = tk.W)
+        
+        tk.lbl = tk.Label(self, text="How many rows?").grid(row=11, sticky = tk.W, padx=10, pady=10)
+        
+        e1 = tk.Entry(self)
+        e1.grid(row=11, column=0, padx=10, pady=10, columnspan = 3)
+
+        self.get_data_button = tk.Button(self, text = 'Generate Data', command = self.generate_data) ## write to csv ###
+        self.get_data_button.grid(row=12, column = 0, pady = 10)
+        
+        
+        self.results_txt = tk.Text(self, width = 40, height = 5, wrap = tk.WORD)
+        self.results_txt.grid(row = 13, column = 0, pady = 20, columnspan = 3)
+        
+    def generate_data(self):
+        rand_num = random.randint(000000,999999)
+        rand_num2 = random.randint(000000,999999)
+        rand_num3 = random.randint(000000,999999)
+        
+        days = np.arange(0, 365)
+        base_date = np.datetime64('2016-01-01')
+        random_date = base_date + np.random.choice(days)
+        
+        days = np.arange(0, 365)
+        newbasedate = np.datetime64('2018-01-01')
+        new_random_date = newbasedate + np.random.choice(days)
+        
+        drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+        drg_list = drg.drg_admit_display.tolist()
+        rand_drg = np.random.choice(drg_list)
+        
+        payer_list = ['Medicare', 'Medicaid', 'Private']
+        rand_payer = np.random.choice(payer_list)
+        
+        prov_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter',  'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
+        rand_prov = np.random.choice(prov_list)
+        
+        spec_list = ['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'] 
+        rand_spec = np.random.choice(spec_list)
+        
+        if self.checkBox_claim_id.get():
+            print(rand_num)
+        if self.checkBox_empi_id.get():
+            print(rand_num2)
+        if self.checkBox_pop_id.get():
+            print(rand_num3)
+        if self.checkBox_serv_from_date.get():
+            print(random_date)
+        if self.checkBox_serv_to_date.get():
+            print(new_random_date)
+        if self.checkBox_drg.get():
+            print(rand_drg)
+        if self.checkBox_source.get():
+            print(rand_payer)
+        if self.checkBox_prov_name.get():
+            print(rand_prov)
+        if self.checkBox_spec.get():
+            print(rand_spec)
+        else:
+            return None
+        
+    def status(self):
+        chk = ""
+        
+        if self.checkBox_claim_id.get():
+            chk += "You have checked the claim id field!\n"
+
+        if self.checkBox_empi_id.get():
+            chk += "You have checked the empi id field!\n"
+
+        if self.checkBox_pop_id.get():
+            chk += "You have checked the population id field!\n"
+            
+        if self.checkBox_serv_from_date.get():
+            chk += "You have checked the service from date field!\n"
+            
+        if self.checkBox_serv_to_date.get():
+            chk += "You have checked the service to date field!\n"
+            
+        if self.checkBox_drg.get():
+            chk += "You have checked the drg admit field!\n"
+            
+        if self.checkBox_source.get():
+            chk += "You have checked the source description field!\n"
+            
+        if self.checkBox_prov_name.get():
+            chk += "You have checked the provider name field!\n"
+            
+        if self.checkBox_spec.get():
+            chk += "You have checked the specialty field!"
+      
+        self.results_txt.delete(0.0, tk.END)
+        self.results_txt.insert(0.0, chk)
+        
+root = tk.Tk()
+root.title("Data Generator")
+app = Application(root)
+root.mainloop()
