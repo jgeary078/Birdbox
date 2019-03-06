@@ -96,7 +96,7 @@ for x in birdbox1.index.values:
 
 
 ----------------------------------------------------------------------------------------------------------------------------------
-##### RANDOMLY GENERATES NUMBER THROUGH CHECKING BOX ON/OFF #########
+##### RANDOMLY GENERATES FIELDS THROUGH 'GET DATA' BUTTON #########
 
 from tkinter import *
 import tkinter as tk
@@ -107,7 +107,7 @@ from random import randint
 master = Tk()
 
 ## Label ##
-w = Label(master, text="Select Fields", bg='#bbb', width=50)
+w = Label(master, text="Select Fields", bg='#aaa', width=50)
 w.grid(columnspan=2)
 
 ## Creating Checkbuttons for each field ##
@@ -152,8 +152,10 @@ C5.grid(row=5, sticky=W, padx=10, pady=10)
 
 def randomize6():
     import random
-    value6 = random.randint(000000,999999)
-    print(value6)
+    drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+    drg_list = drg.drg_admit_display.tolist()
+    rand_drg = np.random.choice(drg_list)
+    print(rand_drg)
 
 var6 = IntVar()
 C6 = Checkbutton(master, text="drg_admit_display", variable=var6)
@@ -161,8 +163,9 @@ C6.grid(row=6, sticky=W, padx=10, pady=10)
 
 def randomize7():
     import random
-    value7 = random.randint(000000,999999)
-    print(value7)
+    payer_list = ['Medicare', 'Medicaid', 'Private']
+    rand_payer = np.random.choice(payer_list)
+    print(rand_payer)
 
 var7 = IntVar()
 C7 = Checkbutton(master, text="source_description", variable=var7)
@@ -170,8 +173,9 @@ C7.grid(row=7, sticky=W, padx=10, pady=10)
 
 def randomize8():
     import random
-    value8 = random.randint(000000,999999)
-    print(value8)
+    prov_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter', 'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
+    rand_prov = np.random.choice(prov_list)
+    print(rand_prov)
 
 var8 = IntVar()
 C8 = Checkbutton(master, text="provider_name", variable=var8)
@@ -179,8 +183,9 @@ C8.grid(row=8, sticky=W, padx=10, pady=10)
 
 def randomize9():
     import random
-    value9 = random.randint(000000,999999)
-    print(value9)
+    spec_list = ['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'] 
+    rand_spec = np.random.choice(spec_list)
+    print(rand_spec)
 
 var9 = IntVar()
 C9 = Checkbutton(master, text="specialty", variable=var9)
