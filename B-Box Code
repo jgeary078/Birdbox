@@ -120,9 +120,19 @@ var1 = IntVar()
 C1 = Checkbutton(master, text="claim_id", variable=var1)
 C1.grid(row=1, sticky=W, padx=10, pady=10)
 
+def randomize2():
+    import random
+    value2 = random.randint(000000,999999)
+    print(value2)
+
 var2 = IntVar()
 C2 = Checkbutton(master, text="empi_id", variable=var2)
 C2.grid(row=2, sticky=W, padx=10, pady=10)
+
+def randomize3():
+    import random
+    value3 = random.randint(000000,999999)
+    print(value3)
 
 var3 = IntVar()
 C3 = Checkbutton(master, text="population_id", variable=var3)
