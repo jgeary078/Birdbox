@@ -19,63 +19,54 @@ class Application(tk.Frame):
         tk.Checkbutton(self,
                     text = "claim_id",
                     variable = self.checkBox_claim_id,
-                    command = self.status
                     ).grid(row = 2, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_empi_id = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "empi_id",
                     variable = self.checkBox_empi_id,
-                    command = self.status
                     ).grid(row = 3, column = 0, pady = 10, sticky = tk.W)
 
         self.checkBox_pop_id = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "population_id",
                     variable = self.checkBox_pop_id,
-                    command = self.status
                     ).grid(row = 4, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_serv_from_date = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "service_from_date",
                     variable = self.checkBox_serv_from_date,
-                    command = self.status
                     ).grid(row = 5, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_serv_to_date = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "service_to_date",
                     variable = self.checkBox_serv_to_date,
-                    command = self.status
                     ).grid(row = 6, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_drg = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "drg_admit_display",
                     variable = self.checkBox_drg,
-                    command = self.status
                     ).grid(row = 7, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_source = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "source_description",
                     variable = self.checkBox_source,
-                    command = self.status
                     ).grid(row = 8, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_prov_name = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "provider_name",
                     variable = self.checkBox_prov_name,
-                    command = self.status
                     ).grid(row = 9, column = 0, pady = 10, sticky = tk.W)
         
         self.checkBox_spec = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "specialty",
                     variable = self.checkBox_spec,
-                    command = self.status
                     ).grid(row = 10, column = 0, pady = 10, sticky = tk.W)
         
         tk.lbl = tk.Label(self, text="How many rows?").grid(row=11, sticky = tk.W, padx=10, pady=10)
@@ -86,9 +77,6 @@ class Application(tk.Frame):
         self.get_data_button = tk.Button(self, text = 'Generate Data', command = self.generate_data) ## write to csv ###
         self.get_data_button.grid(row=12, column = 0, pady = 10)
         
-        
-        self.results_txt = tk.Text(self, width = 40, height = 5, wrap = tk.WORD)
-        self.results_txt.grid(row = 13, column = 0, pady = 20, columnspan = 3)
         
     def generate_data(self):
         rand_num = random.randint(000000,999999)
@@ -103,7 +91,7 @@ class Application(tk.Frame):
         newbasedate = np.datetime64('2018-01-01')
         new_random_date = newbasedate + np.random.choice(days)
         
-        drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+        drg = pd.read_csv(r"C:\Users\hh068327\OneDrive - Cerner Corporation\A.L.L\Demo Data\aprdrg_list.csv")
         drg_list = drg.drg_admit_display.tolist()
         rand_drg = np.random.choice(drg_list)
         
@@ -136,40 +124,7 @@ class Application(tk.Frame):
             print(rand_spec)
         else:
             return None
-        
-    def status(self):
-        chk = ""
-        
-        if self.checkBox_claim_id.get():
-            chk += "You have checked the claim id field!\n"
-
-        if self.checkBox_empi_id.get():
-            chk += "You have checked the empi id field!\n"
-
-        if self.checkBox_pop_id.get():
-            chk += "You have checked the population id field!\n"
-            
-        if self.checkBox_serv_from_date.get():
-            chk += "You have checked the service from date field!\n"
-            
-        if self.checkBox_serv_to_date.get():
-            chk += "You have checked the service to date field!\n"
-            
-        if self.checkBox_drg.get():
-            chk += "You have checked the drg admit field!\n"
-            
-        if self.checkBox_source.get():
-            chk += "You have checked the source description field!\n"
-            
-        if self.checkBox_prov_name.get():
-            chk += "You have checked the provider name field!\n"
-            
-        if self.checkBox_spec.get():
-            chk += "You have checked the specialty field!"
-      
-        self.results_txt.delete(0.0, tk.END)
-        self.results_txt.insert(0.0, chk)
-        
+                
 root = tk.Tk()
 root.title("Data Generator")
 app = Application(root)
