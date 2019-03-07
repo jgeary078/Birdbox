@@ -117,17 +117,23 @@ class Application(tk.Frame):
             for i in range(num_rows):
                 print(random.randint(000000,999999))
         if self.checkBox_serv_from_date.get():
-            print(random_date)
+            for i in range(num_rows):
+                print(base_date + np.random.choice(days))
         if self.checkBox_serv_to_date.get():
-            print(new_random_date)
+            for i in range(num_rows):
+                print(newbasedate + np.random.choice(days))
         if self.checkBox_drg.get():
-            print(rand_drg)
+            for i in range(num_rows):
+                print(np.random.choice(drg_list))
         if self.checkBox_source.get():
-            print(rand_payer)
+            for i in range(num_rows):
+                print(np.random.choice(payer_list))
         if self.checkBox_prov_name.get():
-            print(rand_prov)
+            for i in range(num_rows):
+                print(np.random.choice(prov_list))
         if self.checkBox_spec.get():
-            print(rand_spec)
+            for i in range(num_rows):
+                print(np.random.choice(spec_list))
         else:
             return None
         
