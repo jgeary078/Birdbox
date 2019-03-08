@@ -170,6 +170,7 @@ class Application(tk.Frame):
             df_dict[i] = columns
             # print(test)
         demodf = pd.DataFrame(data=df_dict)
+        demodf = demodf.transpose()
         print(demodf)
 
 root = tk.Tk()
