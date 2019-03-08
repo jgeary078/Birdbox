@@ -1,0 +1,37 @@
+import random
+import pandas as pd
+import numpy as np
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+drg = pd.read_csv(r"C:\Users\TL068507\Desktop\APRDRG list.csv")
+drg_list = drg.drg_admit_display.tolist()
+
+# create a dictionary #
+dict = {'claim_id': [random.randint(000000,999999)],
+        'empi_id': [random.randint(000000,999999)],
+        'pop_id': [random.randint(000000,999999)],
+        'drg': (random.choice(drg_list)),
+        'payer': (np.random.choice(['Medicare', 'Medicaid', 'Private'])),
+        'prov': (np.random.choice(['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter',  'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens'])),
+        'spec': (np.random.choice(['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine']))
+}
+
+#Ask user for how many rows of data they want
+list_size=int(input('How many rows would you like?'))
+
+def list1(num_values):
+    return list(range(num_values))
+
+ind = list(range(list_size))
+
+birdbox1=pd.DataFrame(dict,index=ind)
+for x in birdbox1.index.values:
+    birdbox1.set_value(x, ['prov'], (np.random.choice(['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter',  'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens'])))
+    birdbox1.set_value(x, ['claim_id'], (random.randint(000000,999999)))
+    birdbox1.set_value(x, ['payer'], (np.random.choice(['Medicare', 'Medicaid', 'Private'])))
+    birdbox1.set_value(x, ['claim_id'], (random.randint(000000,999999)))
+    birdbox1.set_value(x, ['empi_id'], (random.randint(000000,999999)))
+    birdbox1.set_value(x, ['pop_id'], (random.randint(000000,999999)))
+    birdbox1.set_value(x, ['drg'], (random.choice(drg_list)))
+    birdbox1.set_value(x, ['spec'], (np.random.choice(['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'])))
