@@ -5,16 +5,37 @@ import random
 
 
 class Application(tk.Frame):
+    
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         self.grid()
         self.create_widgets()
         
-        
     def create_widgets(self):
-        w = tk.Label(self,text = "Select desired columns:", bg='#aaa', width=50)
-        w.grid(row = 1, column = 0, sticky = tk.W)
+        w = tk.Label(self, text="Select desired columns:", bg='#aaa', width=50)
+        w.grid(row=1, column=0, sticky=tk.W)
         
+        checkboxes = {'claim_id': 2,
+                      'empi_id': 3,
+                      'population_id': 4,
+                      'service_from_date': 5,
+                      'service_to_date': 6,
+                      'drg_admit_display': 7,
+                      'source_description': 8,
+                      'provider_name': 9,
+                      'specialty': 10,
+                      }
+        
+        self.checkbox_dict = {}
+        for k,v in checkboxes.items():
+            self.checkbox_dict[k] = tk.BooleanVar()
+            tk.Checkbutton(self, text=k, variable=self.checkbox_dict[k]
+            ).grid(row=v, column=0, pady=10, stick=tk.W)
+
+
+
+
+        """
         self.checkBox_claim_id = tk.BooleanVar()
         tk.Checkbutton(self,
                     text = "claim_id",
@@ -68,51 +89,64 @@ class Application(tk.Frame):
                     text = "specialty",
                     variable = self.checkBox_spec,
                     ).grid(row = 10, column = 0, pady = 10, sticky = tk.W)
-        
-        tk.lbl = tk.Label(self, text="How many rows?").grid(row=11, sticky = tk.W, padx=10, pady=10)
+"""
+
+        tk.lbl = tk.Label(self, text="How many rows?"
+                          ).grid(row=11, sticky = tk.W, padx=10, pady=10)
         
         self.entry_1 = tk.Entry(self)
         self.entry_1.grid(row=11, column=0, padx=10, pady=10, columnspan = 3)
 
-        self.get_data_button = tk.Button(self, text = 'Generate Data', command = self.generate_data)
-        self.get_data_button.grid(row=12, column = 0, pady = 10)
-        
+        self.get_data_button = tk.Button(self, text='Generate Data',
+                                         command=self.generate_data)
+        self.get_data_button.grid(row=12, column=0, pady=10)
         
     def generate_data(self):
-        
-
-        rand_num = random.randint(000000,999999)
-        rand_num2 = random.randint(000000,999999)
-        rand_num3 = random.randint(000000,999999)
-        
-        
         days = np.arange(0, 365)
         base_date = np.datetime64('2016-01-01')
-        random_date = base_date + np.random.choice(days)
         
         days = np.arange(0, 365)
         newbasedate = np.datetime64('2018-01-01')
-        new_random_date = newbasedate + np.random.choice(days)
         
-        drg = pd.read_csv(r"C:\Users\hh068327\OneDrive - Cerner Corporation\A.L.L\Demo Data\aprdrg_list.csv")
+        drg = pd.read_csv(r".\aprdrg_list.csv")
         drg_list = drg.drg_admit_display.tolist()
-        rand_drg = np.random.choice(drg_list)
         
         payer_list = ['Medicare', 'Medicaid', 'Private']
-        rand_payer = np.random.choice(payer_list)
         
         prov_list = ['Dr. Mark Greene', 'Dr. Doug Ross', 'Dr. Susan Lewis', 'Dr. John Carter',  'Dr. Carol Hathaway', 'Dr. Derek Sheperd', 'Dr. Meredith Grey', 'Dr. Andrew DeLuca', 'Dr. Jackson Sloan', 'Dr. Alex Avery', 'Dr. Izzie Karev', 'Dr. Callie Stevens']
-        rand_prov = np.random.choice(prov_list)
         
         spec_list = ['Anesthesiology', 'Cardiology','Dermatology', 'Family Practice', 'Gastroenterology', 'Internal Medicine'] 
-        rand_spec = np.random.choice(spec_list)
         
-        num_rows = int(self.entry_1.get())
+        try:
+            num_rows = int(self.entry_1.get())
+        except ValueError:
+            num_rows = 1
 
 
         df_dict = {}
         for i in range(num_rows):
             columns = {}
+            if self.checkbox_dict['claim_id'].get():
+                columns['claim_id'] = random.randint(000000,999999)
+            if self.checkbox_dict['empi_id'].get():
+                columns['empi_id'] = random.randint(000000,999999)
+            if self.checkbox_dict['population_id'].get():
+                columns['population_id'] = random.randint(000000,999999)
+            if self.checkbox_dict['service_from_date'].get():
+                columns['service_from_date'] = base_date + np.random.choice(days)
+            if self.checkbox_dict['service_to_date'].get():
+                columns['service_to_date'] = newbasedate + np.random.choice(days)
+            if self.checkbox_dict['drg_admit_display'].get():
+                columns['drg_admit_display'] = np.random.choice(drg_list)
+            if self.checkbox_dict['source_description'].get():
+                columns['source_description'] = np.random.choice(payer_list)
+            if self.checkbox_dict['provider_name'].get():
+                columns['provider_name'] = np.random.choice(prov_list)
+            if self.checkbox_dict['specialty'].get():
+                columns['specialty'] = np.random.choice(spec_list)
+
+
+            """
             if self.checkBox_claim_id.get():
                 columns['claim_id'] = random.randint(000000,999999)
             if self.checkBox_empi_id.get():
@@ -131,11 +165,14 @@ class Application(tk.Frame):
                 columns['prov_name'] = np.random.choice(prov_list)
             if self.checkBox_spec.get():
                 columns['spec'] = np.random.choice(spec_list)
+"""
+
+
             df_dict[i] = columns
-        demodf = pd.DataFrame(data=df_dict)
-        demodf = demodf.transpose()
-        demodf.to_csv('ultimatetest.csv', index=False, sep=',')
-        print(demodf)
+        demo_df = pd.DataFrame(data=df_dict)
+        demo_df = demo_df.transpose()
+        demo_df.to_csv('final.csv', index=False, sep=',')
+        print(demo_df)
 
 
 
